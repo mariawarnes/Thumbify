@@ -7,7 +7,9 @@ Thumbify is a simple and powerful batch image processor script for Photoshop tha
 - Unzip 'Thumbify' to Downloads folder.
 - Open 'Thumbify' folder.
 - Run 'install-win'.
+
 or
+
 - Download ZIP to your computer.
 - Unzip 'Thumbify'.
 - Open Photoshop.
