@@ -1,11 +1,12 @@
 function pad(name, size) {
-    var s = name;
-    while (s.length < (size || 2)) { s = "0" + s; }
-    return s;
+    while (name.length < size) {
+        name = "0" + name;
+    }
+    return name;
 }
 
 function SaveForWeb(saveFile, Path, fileName) {
-    var saveFile = File(Path + "/" + fileName + ".jpg");
+    saveFile = File(Path + "/" + fileName + ".jpg");
     var sfwOptions = new ExportOptionsSaveForWeb();
     sfwOptions.format = SaveDocumentType.JPEG;
     sfwOptions.includeProfile = false;
@@ -87,7 +88,13 @@ var renamedFileList = folder1.getFiles(/.+\.(?:gif|jpe?g||tiff?||bmp|png)$/i);
 for (var j = 0; j < renamedFileList.length; j++) {
     // Open that file
     open(renamedFileList[j]);
-    fileNameNum++;
+
+    if (fileName != "") {
+        fileNameNum++;
+        fileNameNum = pad(fileNameNum, 3);
+    } else {
+        fileNameNum = activeDocument.name.substring(0, activeDocument.name.lastIndexOf("."));
+    }
 
     // Get height and width
     var imgWidth = activeDocument.width;
@@ -100,7 +107,7 @@ for (var j = 0; j < renamedFileList.length; j++) {
         activeDocument.resizeImage(UnitValue(parseInt(maxWidthLarge), "px"), null, 72, ResampleMethod.BICUBIC);
     }
     // Save the resized file to the selected large output folder
-    SaveForWeb(app.activeDocument, largeOutFolder, pad(fileNameNum, 3));
+    SaveForWeb(app.activeDocument, largeOutFolder, fileNameNum);
 
     // Thumb ////////////////////////////////////////
     // If a portrait or square image
@@ -117,7 +124,7 @@ for (var j = 0; j < renamedFileList.length; j++) {
     }
 
     // Save the resized file to the selected large output folder
-    SaveForWeb(app.activeDocument, thumbOutFolder, pad(fileNameNum, 3));
+    SaveForWeb(app.activeDocument, thumbOutFolder, fileNameNum);
 
     // Close the image without saving
     app.activeDocument.close(SaveOptions.DONOTSAVECHANGES);
