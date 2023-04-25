@@ -29,7 +29,7 @@ app.preferences.rulerUnits = Units.PIXELS;
 alert("Select a folder to process");
 var inputFolder = Folder.selectDialog();
 
-// Enter a maximum width for large
+// Enter a starting number
 var fileName = prompt("Enter a file name starting number (with no leading '0's)", "");
 var fileNameNum = parseInt(fileName) - 1;
 
@@ -66,6 +66,7 @@ for (var i = 0; i < inputFileList.length; i++) {
     open(inputFileList[i]);
 
     var docRef = app.activeDocument.name;
+    docRef = docRef.replace(/ /g, '');
     docRef = docRef.split('.').slice(0, -1).join('.');
 
     if (isInteger(docRef)) {
