@@ -249,7 +249,7 @@ function go() {
     var date = new Date();
     var timestamp = date.getTime();
     // Create a new folder in Downloads
-    var folder1 = Folder("~/Downloads/Image Processor Backup/" + timestamp + "/");
+    var folder1 = Folder("~/Downloads/Thumbify Backup/" + timestamp + "/");
     // Check if folder exists, if not create it.
     if (!folder1.exists) folder1.create();
 
